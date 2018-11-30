@@ -15,6 +15,7 @@
 		54B6E87E21B10431002F27A9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B6E87D21B10431002F27A9 /* main.m */; };
 		54B6E88821B10431002F27A9 /* PlistReaderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B6E88721B10431002F27A9 /* PlistReaderTests.m */; };
 		54B6E89321B10431002F27A9 /* PlistReaderUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B6E89221B10431002F27A9 /* PlistReaderUITests.m */; };
+		54B6E8A121B104B5002F27A9 /* code.plist in Resources */ = {isa = PBXBuildFile; fileRef = 54B6E8A021B104B5002F27A9 /* code.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		54B6E88E21B10431002F27A9 /* PlistReaderUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PlistReaderUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		54B6E89221B10431002F27A9 /* PlistReaderUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlistReaderUITests.m; sourceTree = "<group>"; };
 		54B6E89421B10431002F27A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		54B6E8A021B104B5002F27A9 /* code.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = code.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 		54B6E86D21B10430002F27A9 /* PlistReader */ = {
 			isa = PBXGroup;
 			children = (
+				54B6E8A021B104B5002F27A9 /* code.plist */,
 				54B6E86E21B10430002F27A9 /* AppDelegate.h */,
 				54B6E86F21B10430002F27A9 /* AppDelegate.m */,
 				54B6E87121B10430002F27A9 /* ViewController.h */,
@@ -238,6 +241,7 @@
 				54B6E87B21B10431002F27A9 /* LaunchScreen.storyboard in Resources */,
 				54B6E87821B10431002F27A9 /* Assets.xcassets in Resources */,
 				54B6E87621B10430002F27A9 /* Main.storyboard in Resources */,
+				54B6E8A121B104B5002F27A9 /* code.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
