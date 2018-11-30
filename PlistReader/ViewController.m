@@ -9,7 +9,9 @@
 #import "ViewController.h"
 
 @interface ViewController ()
-
+@property (strong, nonatomic) NSArray *totalList;
+@property (strong, nonatomic) NSMutableArray *indexList;
+@property (assign, nonatomic) BOOL notEnoughWords;
 @end
 
 @implementation ViewController
@@ -36,6 +38,8 @@
         if (threeWords.count == 3) {
             // 给第3节重新造词
             NSString *thirdWord = [NSString stringWithFormat:@"%@",[self makeName]];
+            // 造词后index自增
+            [self add];
             // 拼接3部分
             NSString *newLine = [NSString stringWithFormat:@"%@ %@ %@\n",threeWords[0], threeWords[1], thirdWord];
             // 拼接文件内容
@@ -56,66 +60,64 @@
     [self creatNewFile:writeDic];
 }
 
-NSArray *_list1;
-NSArray *_list2;
-NSArray *_list3;
-NSArray *_list4;
-NSArray *_totalList;
-NSMutableArray *_indexList;
-
 #pragma mark 初始化造词数据
 - (void)initNameData
 {
-    
     // 动词 形容词 名词 名词 4组词语依次混搭，如：查询 新 用户 信息
-    _list1 = @[@"request", @"delete", @"creat"];
-    _list2 = @[@"", @"new", @"old", @"temp"];
-    _list3 = @[@"user", @"device", @"group"];
-    _list4 = @[@"info", @"status", @"attribute"];
+    NSArray *list1 = @[@"yw_request", @"yw_delete", @"yw_creat", @"yw_update", @"yw_show", @"yw_query", @"yw_search", @"yw_make", @"yw_refresh"];
+    NSArray *list2 = @[@"", @"New", @"Old", @"Temp", @"Some", @"the"];
+    NSArray *list3 = @[@"User", @"Device", @"Group", @"Member", @"Family", @"IPC", @"DoorLock", @"CenterControl"];
+    NSArray *list4 = @[@"Info", @"Status", @"Attribute", @"Data"];
     
-    _totalList = @[_list1, _list2, _list3, _list4];
+    _totalList = @[list1, list2, list3, list4];
     _indexList = [@[@0, @0, @0, @0] mutableCopy];
 }
 
-#pragma mark 判断词穷+进位
-- (BOOL)notEnoughWords
+#pragma mark 累加\进位
+- (void)add
 {
-    __block BOOL notEnoughWords = 1;
+    __block BOOL j = 1;
     [_indexList enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(id  _Nonnull obj, NSUInteger i, BOOL * _Nonnull stop) {
-        
-            int index = [obj intValue];
-            // 没用完
-            if (index < [_totalList[i] count])
-            {
-                notEnoughWords = 0;
-                _indexList[i] = @(index + 1);
+       
+        // 单组序号
+        NSInteger index = [self.indexList[i] integerValue];
+        // 单组总数
+        NSInteger count = [self.totalList[i] count];
+//        NSLog(@"第%ld组 序号：%ld", i, index);
+        if (j == 1) {
+            // 消耗一次进位
+            j = 0;
+            //=========== 累加 ===========
+            // 第0位只累加不循环
+            if (i == 0) {
+                self.indexList[i] = @(index + 1);
             }
-            // 一组词已用完一轮
+            // 其余位在count范围内循环累加
             else
             {
-                // 进位
-                if (![obj isEqual:[_indexList firstObject]])
-                {
-                    NSNumber *forword = _indexList[i-1];
-                    forword = @([forword integerValue] + 1);
-                    obj = @0;
-                    
-                    NSLog(@"CXHLog:检查进位是否成功%@", _indexList);
-                }
-                // 当第一组词也用完了，就词穷了
-                else
-                {
-                    notEnoughWords = 1;
-                }
+                self.indexList[i] = @((index + 1) % count);
             }
+            
+            //=========== 进位 ===========
+            // 正常进位
+            if (i != 0 && index == 0)
+            {
+                j = 1;
+            }
+            // 第0位进位则结束
+            else if (i == 0 && index == count - 1)
+            {
+                self.notEnoughWords = YES;
+                *stop = YES;
+            }
+        }
     }];
-    return notEnoughWords;
 }
 
 #pragma mark 取名造词
 - (NSString *)makeName
 {
-    if (![self notEnoughWords])
+    if (!self.notEnoughWords)
     {
         // 依次
         NSMutableString *mStr = [@"" mutableCopy];
@@ -131,7 +133,7 @@ NSMutableArray *_indexList;
     }
     else
     {
-        NSLog(@"CXHLog:词穷了");
+//        NSLog(@"CXHLog:词穷了");
         return @"词穷了";
     }
 }
