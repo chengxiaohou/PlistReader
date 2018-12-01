@@ -12,6 +12,8 @@
 @property (strong, nonatomic) NSArray *totalList;
 @property (strong, nonatomic) NSMutableArray *indexList;
 @property (assign, nonatomic) BOOL notEnoughWords;
+/** 造词库 */
+@property (strong, nonatomic) NSMutableArray *words;
 @end
 
 @implementation ViewController
@@ -20,7 +22,12 @@
     [super viewDidLoad];
     
     [self initNameData];
-    
+    [self begin];
+}
+
+#pragma mark 执行
+- (void)begin
+{
     // 首先要在工程里放一个plist文件
     NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"code" ofType:@"plist"];
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
@@ -28,7 +35,10 @@
     NSString *totalStr = dic[@"theKey"];
     NSString *newTotalString = @"";
     NSArray *allLines = [totalStr componentsSeparatedByString:@"\n"];
-
+    
+    if (allLines.count > _words.count) {
+        NSLog(@"CXHLog:⚠️⚠️⚠️词库不足：%ld > %ld", allLines.count, _words.count);
+    }
     // 一整行的#define
     int i = 0;
     for (NSString *oneLine in allLines) {
@@ -36,14 +46,18 @@
         // 用空格分割成3份
         NSArray *threeWords = [oneLine componentsSeparatedByString:@" "];
         if (threeWords.count == 3) {
-            // 给第3节重新造词
-            NSString *thirdWord = [NSString stringWithFormat:@"%@",[self makeName]];
-            // 造词后index自增
-            [self add];
-            // 拼接3部分
-            NSString *newLine = [NSString stringWithFormat:@"%@ %@ %@\n",threeWords[0], threeWords[1], thirdWord];
-            // 拼接文件内容
-            newTotalString = [newTotalString stringByAppendingString:newLine];
+            // 词库充足
+            if (i < _words.count) {
+                // 给第3节重新造词
+                NSString *thirdWord = [NSString stringWithFormat:@"%@",_words[i]];
+                // 造词后index自增
+                [self readyForNext];
+                // 拼接3部分
+                NSString *newLine = [NSString stringWithFormat:@"%@ %@ %@\n",threeWords[0], threeWords[1], thirdWord];
+                // 拼接文件内容
+                newTotalString = [newTotalString stringByAppendingString:newLine];
+                NSLog(@"CXHLog:生成结果预览：%@", newLine);
+            }
         }
         else
         {
@@ -52,29 +66,50 @@
         
         i++;
     }
-    NSLog(@"CXHLog:%@", newTotalString);
     
     NSDictionary *writeDic = @{
-                          @"newKey" : newTotalString
-                          };
+                               @"newKey" : newTotalString
+                               };
     [self creatNewFile:writeDic];
 }
+
 
 #pragma mark 初始化造词数据
 - (void)initNameData
 {
-    // 动词 形容词 名词 名词 4组词语依次混搭，如：查询 新 用户 信息
-    NSArray *list1 = @[@"yw_request", @"yw_delete", @"yw_creat", @"yw_update", @"yw_show", @"yw_query", @"yw_search", @"yw_make", @"yw_refresh"];
-    NSArray *list2 = @[@"", @"New", @"Old", @"Temp", @"Some", @"the"];
-    NSArray *list3 = @[@"User", @"Device", @"Group", @"Member", @"Family", @"IPC", @"DoorLock", @"CenterControl"];
-    NSArray *list4 = @[@"Info", @"Status", @"Attribute", @"Data"];
+    // 动词+形容词+名词+名词，4组词语依次混搭，如：查询 新 用户 信息
+    NSArray *list1 = @[@"yw_request", @"yw_delete", @"yw_creat", @"yw_update", @"yw_show", @"yw_query", @"yw_search", @"yw_make", @"yw_refresh", @"yw_get", @"yw_save", @"yw_download", @"yw_reset", @"yw_load", @"yw_send", @"yw_modify", @"yw_bind", @"yw_unbind", @"yw_add", @"yw_batch", @"yw_init", @"yw_config", @"yw_parse", @"yw_find"];
+    NSArray *list2 = @[@"", @"New", @"Old", @"Temp", @"Some", @"The", @"Full", @"Total", @"All", @"Free", @"Vip", @"Hot", @"Online", @"Offline"];
+    NSArray *list3 = @[@"User", @"Device", @"Group", @"Member", @"Family", @"IPC", @"DoorLock", @"CenterControl", @"DoorBell", @"SmartDoor", @"Sensor", @"Friend"];
+    NSArray *list4 = @[@"Info", @"Status", @"Attribute", @"Data", @"ID", @"TypeID", @"Token", @"List", @"Dic", @"Config", @"Name"];
     
     _totalList = @[list1, list2, list3, list4];
     _indexList = [@[@0, @0, @0, @0] mutableCopy];
+    _words = [@[] mutableCopy];
+    
+    // 生成词库
+    NSMutableArray *tempArr = [@[] mutableCopy];
+    while (!_notEnoughWords) {
+        
+        [tempArr addObject:[self makeName]];
+        [self readyForNext];
+    }
+    
+    NSLog(@"CXHLog:词库总数 %ld", tempArr.count);
+    
+    NSLog(@"CXHLog:乱序排列中...");
+    // 打乱顺序
+    while (tempArr.count > 0) {
+        NSInteger count = tempArr.count - 1;
+        int random = count == 0 ? 0 : arc4random()%(count);// 剩下最后一个则取0，其余随机
+        NSString *word = tempArr[random];
+        [_words addObject:word];
+        [tempArr removeObject:word];
+    }
 }
 
 #pragma mark 累加\进位
-- (void)add
+- (void)readyForNext
 {
     __block BOOL j = 1;
     [_indexList enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(id  _Nonnull obj, NSUInteger i, BOOL * _Nonnull stop) {
