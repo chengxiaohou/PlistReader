@@ -49,11 +49,17 @@
             // 词库充足
             if (i < _words.count) {
                 // 给第3节重新造词
-                NSString *thirdWord = [NSString stringWithFormat:@"%@",_words[i]];
+                NSString *thirdWord = [NSString stringWithFormat:@"%@", _words[i]];
                 // 造词后index自增
                 [self readyForNext];
+
+#if 1
                 // 拼接3部分
                 NSString *newLine = [NSString stringWithFormat:@"%@ %@ %@\n",threeWords[0], threeWords[1], thirdWord];
+#else
+                // 只改前缀
+                NSString *newLine = [NSString stringWithFormat:@"%@ %@ CXH_%@\n",threeWords[0], threeWords[1], threeWords[1]];
+#endif
                 // 拼接文件内容
                 newTotalString = [newTotalString stringByAppendingString:newLine];
                 NSLog(@"CXHLog:生成结果预览：%@", newLine);
@@ -111,37 +117,35 @@
 #pragma mark 累加\进位
 - (void)readyForNext
 {
+    if (self.notEnoughWords == YES) return;
+    
+    NSLog(@"\n");
     __block BOOL j = 1;
     [_indexList enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(id  _Nonnull obj, NSUInteger i, BOOL * _Nonnull stop) {
        
         // 单组序号
         NSInteger index = [self.indexList[i] integerValue];
-        // 单组总数
-        NSInteger count = [self.totalList[i] count];
-//        NSLog(@"第%ld组 序号：%ld", i, index);
+        // 单组进制数
+        NSInteger count = [self.totalList[i] count] - 1;
+        
+        NSLog(@"%ld: %ld/%ld", i, index, (long)count);
+        // 执行进位
         if (j == 1) {
             // 消耗一次进位
             j = 0;
             //=========== 累加 ===========
-            // 第0位只累加不循环
-            if (i == 0) {
-                self.indexList[i] = @(index + 1);
-            }
-            // 其余位在count范围内循环累加
-            else
-            {
-                self.indexList[i] = @((index + 1) % count);
-            }
-            
-            //=========== 进位 ===========
-            // 正常进位
-            if (i != 0 && index == 0)
+            self.indexList[i] = @(index + 1);
+            //=========== 计算下次进位情况 ===========
+            // 非第0位，下次需进位
+            if (i != 0 && index == count)
             {
                 j = 1;
+                self.indexList[i] = @(0);// 进位归零
             }
             // 第0位进位则结束
-            else if (i == 0 && index == count - 1)
+            else if (i == 0 && index == count)
             {
+                NSLog(@"CXHLog:结束===================");
                 self.notEnoughWords = YES;
                 *stop = YES;
             }
@@ -154,6 +158,7 @@
 {
     if (!self.notEnoughWords)
     {
+        NSLog(@"造");
         // 依次
         NSMutableString *mStr = [@"" mutableCopy];
         int i = 0;
@@ -168,8 +173,7 @@
     }
     else
     {
-//        NSLog(@"CXHLog:词穷了");
-        return @"词穷了";
+        return @"词库不足";
     }
 }
 
