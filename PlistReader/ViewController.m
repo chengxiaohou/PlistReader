@@ -84,7 +84,7 @@
 - (void)initNameData
 {
     // 动词+形容词+名词+名词，4组词语依次混搭，如：查询 新 用户 信息
-    NSArray *list1 = @[@"yw_request", @"yw_delete", @"yw_creat", @"yw_update", @"yw_show", @"yw_query", @"yw_search", @"yw_make", @"yw_refresh", @"yw_get", @"yw_save", @"yw_download", @"yw_reset", @"yw_load", @"yw_send", @"yw_modify", @"yw_bind", @"yw_unbind", @"yw_add", @"yw_batch", @"yw_init", @"yw_config", @"yw_parse", @"yw_find"];
+    NSArray *list1 = @[@"suis_request", @"suis_delete", @"suis_creat", @"suis_update", @"suis_show", @"suis_query", @"suis_search", @"suis_make", @"suis_refresh", @"suis_get", @"suis_save", @"suis_download", @"suis_reset", @"suis_load", @"suis_send", @"suis_modify", @"suis_bind", @"suis_unbind", @"suis_add", @"suis_batch", @"suis_init", @"suis_config", @"suis_parse", @"suis_find"];
     NSArray *list2 = @[@"", @"New", @"Old", @"Temp", @"Some", @"The", @"Full", @"Total", @"All", @"Free", @"Vip", @"Hot", @"Online", @"Offline"];
     NSArray *list3 = @[@"User", @"Device", @"Group", @"Member", @"Family", @"IPC", @"DoorLock", @"CenterControl", @"DoorBell", @"SmartDoor", @"Sensor", @"Friend"];
     NSArray *list4 = @[@"Info", @"Status", @"Attribute", @"Data", @"ID", @"TypeID", @"Token", @"List", @"Dic", @"Config", @"Name"];
@@ -119,7 +119,7 @@
 {
     if (self.notEnoughWords == YES) return;
     
-    NSLog(@"\n");
+//    NSLog(@"\n");
     __block BOOL j = 1;
     [_indexList enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(id  _Nonnull obj, NSUInteger i, BOOL * _Nonnull stop) {
        
@@ -128,7 +128,7 @@
         // 单组进制数
         NSInteger count = [self.totalList[i] count] - 1;
         
-        NSLog(@"%ld: %ld/%ld", i, index, (long)count);
+//        NSLog(@"%ld: %ld/%ld", i, index, (long)count);
         // 执行进位
         if (j == 1) {
             // 消耗一次进位
@@ -158,7 +158,7 @@
 {
     if (!self.notEnoughWords)
     {
-        NSLog(@"造");
+//        NSLog(@"造");
         // 依次
         NSMutableString *mStr = [@"" mutableCopy];
         int i = 0;
