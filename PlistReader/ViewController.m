@@ -52,13 +52,15 @@
                 NSString *thirdWord = [NSString stringWithFormat:@"%@", _words[i]];
                 // 造词后index自增
                 [self readyForNext];
-
-#if 1
+                //_______________________________________________________________________________________________________________
+                
+#pragma mark - ......::::::: 功能选择 :::::::......
+#if 0
                 // 拼接3部分
                 NSString *newLine = [NSString stringWithFormat:@"%@ %@ %@\n",threeWords[0], threeWords[1], thirdWord];
 #else
                 // 只改前缀
-                NSString *newLine = [NSString stringWithFormat:@"%@ %@ CXH_%@\n",threeWords[0], threeWords[1], threeWords[1]];
+                NSString *newLine = [NSString stringWithFormat:@"%@ %@ TEA_%@\n",threeWords[0], threeWords[1], threeWords[1]];
 #endif
                 // 拼接文件内容
                 newTotalString = [newTotalString stringByAppendingString:newLine];
@@ -84,9 +86,14 @@
 - (void)initNameData
 {
     // 动词+形容词+名词+名词，4组词语依次混搭，如：查询 新 用户 信息
-    NSArray *list1 = @[@"suis_request", @"suis_delete", @"suis_creat", @"suis_update", @"suis_show", @"suis_query", @"suis_search", @"suis_make", @"suis_refresh", @"suis_get", @"suis_save", @"suis_download", @"suis_reset", @"suis_load", @"suis_send", @"suis_modify", @"suis_bind", @"suis_unbind", @"suis_add", @"suis_batch", @"suis_init", @"suis_config", @"suis_parse", @"suis_find"];
+//    NSArray *list1 = @[@"suis_request", @"suis_delete", @"suis_creat", @"suis_update", @"suis_show", @"suis_query", @"suis_search", @"suis_make", @"suis_refresh", @"suis_get", @"suis_save", @"suis_download", @"suis_reset", @"suis_load", @"suis_send", @"suis_modify", @"suis_bind", @"suis_unbind", @"suis_add", @"suis_batch", @"suis_init", @"suis_config", @"suis_parse", @"suis_find"];
+//    NSArray *list2 = @[@"", @"New", @"Old", @"Temp", @"Some", @"The", @"Full", @"Total", @"All", @"Free", @"Vip", @"Hot", @"Online", @"Offline"];
+//    NSArray *list3 = @[@"User", @"Device", @"Group", @"Member", @"Family", @"IPC", @"DoorLock", @"CenterControl", @"DoorBell", @"SmartDoor", @"Sensor", @"Friend"];
+//    NSArray *list4 = @[@"Info", @"Status", @"Attribute", @"Data", @"ID", @"TypeID", @"Token", @"List", @"Dic", @"Config", @"Name"];
+    
+    NSArray *list1 = @[@"request", @"delete", @"creat", @"update", @"show", @"query", @"search", @"make", @"refresh", @"get", @"save", @"download", @"reset", @"load", @"send", @"modify", @"bind", @"unbind", @"add", @"batch", @"init", @"config", @"parse", @"find"];
     NSArray *list2 = @[@"", @"New", @"Old", @"Temp", @"Some", @"The", @"Full", @"Total", @"All", @"Free", @"Vip", @"Hot", @"Online", @"Offline"];
-    NSArray *list3 = @[@"User", @"Device", @"Group", @"Member", @"Family", @"IPC", @"DoorLock", @"CenterControl", @"DoorBell", @"SmartDoor", @"Sensor", @"Friend"];
+    NSArray *list3 = @[@"User", @"Device", @"Group", @"Member", @"Friend", @"Goods", @"Payment", @"Cache", @"Order"];
     NSArray *list4 = @[@"Info", @"Status", @"Attribute", @"Data", @"ID", @"TypeID", @"Token", @"List", @"Dic", @"Config", @"Name"];
     
     _totalList = @[list1, list2, list3, list4];
