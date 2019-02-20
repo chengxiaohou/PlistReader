@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5443D799221D264500303B4C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B6E86F21B10430002F27A9 /* AppDelegate.m */; };
+		5443D79A221D264500303B4C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B6E87221B10430002F27A9 /* ViewController.m */; };
 		54B6E87021B10430002F27A9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B6E86F21B10430002F27A9 /* AppDelegate.m */; };
 		54B6E87321B10430002F27A9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B6E87221B10430002F27A9 /* ViewController.m */; };
 		54B6E87621B10430002F27A9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 54B6E87421B10430002F27A9 /* Main.storyboard */; };
@@ -276,6 +278,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5443D799221D264500303B4C /* AppDelegate.m in Sources */,
+				5443D79A221D264500303B4C /* ViewController.m in Sources */,
 				54B6E88821B10431002F27A9 /* PlistReaderTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -25,6 +25,10 @@
     [self begin];
 }
 
+- (void)test {
+    [self initNameData];    
+}
+
 #pragma mark 执行
 - (void)begin
 {
@@ -55,12 +59,12 @@
                 //_______________________________________________________________________________________________________________
                 
 #pragma mark - ......::::::: 功能选择 :::::::......
-#if 0
+#if 1
                 // 拼接3部分
                 NSString *newLine = [NSString stringWithFormat:@"%@ %@ %@\n",threeWords[0], threeWords[1], thirdWord];
 #else
                 // 只改前缀
-                NSString *newLine = [NSString stringWithFormat:@"%@ %@ TEA_%@\n",threeWords[0], threeWords[1], threeWords[1]];
+                NSString *newLine = [NSString stringWithFormat:@"%@ %@ MH_%@\n",threeWords[0], threeWords[1], threeWords[1]];
 #endif
                 // 拼接文件内容
                 newTotalString = [newTotalString stringByAppendingString:newLine];
