@@ -12,16 +12,20 @@
 
 @interface PlistReaderTests : XCTestCase
 
+@property (assign, nonatomic) int index;
+
 @end
 
 @implementation PlistReaderTests
 
 - (void)setUp {
     // Put setup code here. This method is called before the invocation of each test method in the class.
+    NSLog(@"CXHLog:+++++++ setUp");
 }
 
 - (void)tearDown {
     // Put teardown code here. This method is called after the invocation of each test method in the class.
+    NSLog(@"CXHLog:------- tearDown");
 }
 
 
@@ -37,19 +41,25 @@
     }];
 }
 
-- (void)test1 {
-    NSLog(@"CXHLog:1");
+- (void)testA {
+    NSLog(@"CXHLog:A %d", _index);
+    _index = 1;
+    NSLog(@"CXHLog:A %d", _index);
 }
 
-- (void)test2 {
-    ViewController *vc = [ViewController new];
-    [vc test];
-    NSLog(@"CXHLog:2");
+- (void)testB {
+//    ViewController *vc = [ViewController new];
+//    [vc test];
+    NSLog(@"CXHLog:B %d", _index);
+    _index = 2;
+    NSLog(@"CXHLog:B %d", _index);
 
 }
 
-- (void)test3 {
-    NSLog(@"CXHLog:3");
+- (void)testC {
+    NSLog(@"CXHLog:C %d", _index);
+    _index = 3;
+    NSLog(@"CXHLog:C %d", _index);
 }
 
 @end

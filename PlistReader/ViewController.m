@@ -90,12 +90,12 @@
 - (void)initNameData
 {
     // 动词+形容词+名词+名词，4组词语依次混搭，如：查询 新 用户 信息
-//    NSArray *list1 = @[@"suis_request", @"suis_delete", @"suis_creat", @"suis_update", @"suis_show", @"suis_query", @"suis_search", @"suis_make", @"suis_refresh", @"suis_get", @"suis_save", @"suis_download", @"suis_reset", @"suis_load", @"suis_send", @"suis_modify", @"suis_bind", @"suis_unbind", @"suis_add", @"suis_batch", @"suis_init", @"suis_config", @"suis_parse", @"suis_find"];
+//    NSArray *list1 = @[@"mk_request", @"mk_delete", @"mk_creat", @"mk_update", @"mk_show", @"mk_query", @"mk_search", @"mk_make", @"mk_refresh", @"mk_get", @"mk_save", @"mk_download", @"mk_reset", @"mk_load", @"mk_send", @"mk_modify", @"mk_bind", @"mk_unbind", @"mk_add", @"mk_batch", @"mk_init", @"mk_config", @"mk_parse", @"mk_find"];
 //    NSArray *list2 = @[@"", @"New", @"Old", @"Temp", @"Some", @"The", @"Full", @"Total", @"All", @"Free", @"Vip", @"Hot", @"Online", @"Offline"];
 //    NSArray *list3 = @[@"User", @"Device", @"Group", @"Member", @"Family", @"IPC", @"DoorLock", @"CenterControl", @"DoorBell", @"SmartDoor", @"Sensor", @"Friend"];
 //    NSArray *list4 = @[@"Info", @"Status", @"Attribute", @"Data", @"ID", @"TypeID", @"Token", @"List", @"Dic", @"Config", @"Name"];
     
-    NSArray *list1 = @[@"request", @"delete", @"creat", @"update", @"show", @"query", @"search", @"make", @"refresh", @"get", @"save", @"download", @"reset", @"load", @"send", @"modify", @"bind", @"unbind", @"add", @"batch", @"init", @"config", @"parse", @"find"];
+    NSArray *list1 = @[@"mk_request", @"mk_delete", @"mk_creat", @"mk_update", @"mk_show", @"mk_query", @"mk_search", @"mk_make", @"mk_refresh", @"mk_get", @"mk_save", @"mk_download", @"mk_reset", @"mk_load", @"mk_send", @"mk_modify", @"mk_bind", @"mk_unbind", @"mk_add", @"mk_batch", @"mk_init", @"mk_config", @"mk_parse", @"mk_find"];
     NSArray *list2 = @[@"", @"New", @"Old", @"Temp", @"Some", @"The", @"Full", @"Total", @"All", @"Free", @"Vip", @"Hot", @"Online", @"Offline"];
     NSArray *list3 = @[@"User", @"Device", @"Group", @"Member", @"Friend", @"Goods", @"Payment", @"Cache", @"Order"];
     NSArray *list4 = @[@"Info", @"Status", @"Attribute", @"Data", @"ID", @"TypeID", @"Token", @"List", @"Dic", @"Config", @"Name"];

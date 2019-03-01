@@ -31,8 +31,13 @@
 }
 
 - (void)testExample {
-        // Use recording to get started writing UI tests.
-    // Use XCTAssert and related functions to verify your tests produce the correct results.
+    
+    
+    XCUIElement *element = [[[[[XCUIApplication alloc] init] childrenMatchingType:XCUIElementTypeWindow] elementBoundByIndex:0] childrenMatchingType:XCUIElementTypeOther].element;
+    [element tap];
+    [element tap];
+                                // Use recording to get started writing UI tests.
+                // Use XCTAssert and related functions to verify your tests produce the correct results.
 }
 
 @end
