@@ -21,6 +21,7 @@
 		54B6E88821B10431002F27A9 /* PlistReaderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B6E88721B10431002F27A9 /* PlistReaderTests.m */; };
 		54B6E89321B10431002F27A9 /* PlistReaderUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B6E89221B10431002F27A9 /* PlistReaderUITests.m */; };
 		54B6E8A121B104B5002F27A9 /* code.plist in Resources */ = {isa = PBXBuildFile; fileRef = 54B6E8A021B104B5002F27A9 /* code.plist */; };
+		E416885B222BAF7F00819823 /* StoryboardVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E416885A222BAF7F00819823 /* StoryboardVC.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,8 @@
 		54B6E89221B10431002F27A9 /* PlistReaderUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlistReaderUITests.m; sourceTree = "<group>"; };
 		54B6E89421B10431002F27A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		54B6E8A021B104B5002F27A9 /* code.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = code.plist; sourceTree = "<group>"; };
+		E4168859222BAF7F00819823 /* StoryboardVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StoryboardVC.h; sourceTree = "<group>"; };
+		E416885A222BAF7F00819823 /* StoryboardVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StoryboardVC.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +121,8 @@
 				54B6E87921B10431002F27A9 /* LaunchScreen.storyboard */,
 				54B6E87C21B10431002F27A9 /* Info.plist */,
 				54B6E87D21B10431002F27A9 /* main.m */,
+				E4168859222BAF7F00819823 /* StoryboardVC.h */,
+				E416885A222BAF7F00819823 /* StoryboardVC.m */,
 			);
 			path = PlistReader;
 			sourceTree = "<group>";
@@ -274,6 +279,7 @@
 				54B6E87321B10430002F27A9 /* ViewController.m in Sources */,
 				54B6E87E21B10431002F27A9 /* main.m in Sources */,
 				54B6E87021B10430002F27A9 /* AppDelegate.m in Sources */,
+				E416885B222BAF7F00819823 /* StoryboardVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
