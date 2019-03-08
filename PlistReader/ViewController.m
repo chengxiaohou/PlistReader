@@ -68,7 +68,7 @@
 #endif
                 // 拼接文件内容
                 newTotalString = [newTotalString stringByAppendingString:newLine];
-                NSLog(@"CXHLog:生成结果预览：%@", newLine);
+//                NSLog(@"CXHLog:生成结果预览：%@", newLine);
             }
         }
         else
@@ -90,12 +90,12 @@
 - (void)initNameData
 {
     // 动词+形容词+名词+名词，4组词语依次混搭，如：查询 新 用户 信息
-//    NSArray *list1 = @[@"mk_request", @"mk_delete", @"mk_creat", @"mk_update", @"mk_show", @"mk_query", @"mk_search", @"mk_make", @"mk_refresh", @"mk_get", @"mk_save", @"mk_download", @"mk_reset", @"mk_load", @"mk_send", @"mk_modify", @"mk_bind", @"mk_unbind", @"mk_add", @"mk_batch", @"mk_init", @"mk_config", @"mk_parse", @"mk_find"];
+//    NSArray *list1 = @[@"mmsq_request", @"mmsq_delete", @"mmsq_creat", @"mmsq_update", @"mmsq_show", @"mmsq_query", @"mmsq_search", @"mmsq_make", @"mmsq_refresh", @"mmsq_get", @"mmsq_save", @"mmsq_download", @"mmsq_reset", @"mmsq_load", @"mmsq_send", @"mmsq_modify", @"mmsq_bind", @"mmsq_unbind", @"mmsq_add", @"mmsq_batch", @"mmsq_init", @"mmsq_config", @"mmsq_parse", @"mmsq_find"];
 //    NSArray *list2 = @[@"", @"New", @"Old", @"Temp", @"Some", @"The", @"Full", @"Total", @"All", @"Free", @"Vip", @"Hot", @"Online", @"Offline"];
 //    NSArray *list3 = @[@"User", @"Device", @"Group", @"Member", @"Family", @"IPC", @"DoorLock", @"CenterControl", @"DoorBell", @"SmartDoor", @"Sensor", @"Friend"];
 //    NSArray *list4 = @[@"Info", @"Status", @"Attribute", @"Data", @"ID", @"TypeID", @"Token", @"List", @"Dic", @"Config", @"Name"];
     
-    NSArray *list1 = @[@"mk_request", @"mk_delete", @"mk_creat", @"mk_update", @"mk_show", @"mk_query", @"mk_search", @"mk_make", @"mk_refresh", @"mk_get", @"mk_save", @"mk_download", @"mk_reset", @"mk_load", @"mk_send", @"mk_modify", @"mk_bind", @"mk_unbind", @"mk_add", @"mk_batch", @"mk_init", @"mk_config", @"mk_parse", @"mk_find"];
+    NSArray *list1 = @[@"mmsq_request", @"mmsq_delete", @"mmsq_creat", @"mmsq_update", @"mmsq_show", @"mmsq_query", @"mmsq_search", @"mmsq_make", @"mmsq_refresh", @"mmsq_get", @"mmsq_save", @"mmsq_download", @"mmsq_reset", @"mmsq_load", @"mmsq_send", @"mmsq_modify", @"mmsq_bind", @"mmsq_unbind", @"mmsq_add", @"mmsq_batch", @"mmsq_init", @"mmsq_config", @"mmsq_parse", @"mmsq_find"];
     NSArray *list2 = @[@"", @"New", @"Old", @"Temp", @"Some", @"The", @"Full", @"Total", @"All", @"Free", @"Vip", @"Hot", @"Online", @"Offline"];
     NSArray *list3 = @[@"User", @"Device", @"Group", @"Member", @"Friend", @"Goods", @"Payment", @"Cache", @"Order"];
     NSArray *list4 = @[@"Info", @"Status", @"Attribute", @"Data", @"ID", @"TypeID", @"Token", @"List", @"Dic", @"Config", @"Name"];
@@ -202,7 +202,7 @@
     //写入文件
     [dic writeToFile:plistPath atomically:YES];
     
-    NSLog(@"CXHLog:输出地址：%@", plistPath);// 用模拟器运行，在finder里面找
+    NSLog(@"CXHLog:输出地址：\n\n%@", plistPath);// 用模拟器运行，在finder里面找
 }
 
 
