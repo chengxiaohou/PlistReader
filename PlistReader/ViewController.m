@@ -33,6 +33,11 @@
     [self begin];
 }
 
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self.view endEditing:1];
+}
+
 #pragma mark 执行
 - (void)begin
 {
