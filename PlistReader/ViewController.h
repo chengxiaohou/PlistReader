@@ -11,6 +11,6 @@
 @interface ViewController : UIViewController
 
 - (void)initNameData;
-- (void)test;
+//- (void)test;
 @end
 

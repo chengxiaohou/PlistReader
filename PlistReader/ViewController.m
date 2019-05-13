@@ -12,6 +12,9 @@
 @property (strong, nonatomic) NSArray *totalList;
 @property (strong, nonatomic) NSMutableArray *indexList;
 @property (assign, nonatomic) BOOL notEnoughWords;
+@property (weak, nonatomic) IBOutlet UITextField *subTF;
+@property (weak, nonatomic) IBOutlet UITextView *leftTV;
+@property (weak, nonatomic) IBOutlet UITextView *rightTV;
 /** 造词库 */
 @property (strong, nonatomic) NSMutableArray *words;
 @end
@@ -20,23 +23,31 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self initNameData];
-    [self begin];
 }
 
-- (void)test {
-    [self initNameData];    
+//- (void)test {
+//    [self initNameData];
+//}
+- (IBAction)onBegin:(id)sender {
+    
+    [self begin];
 }
 
 #pragma mark 执行
 - (void)begin
 {
-    // 首先要在工程里放一个plist文件
-    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"code" ofType:@"plist"];
-    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
-    // 给key取得名字
-    NSString *totalStr = dic[@"theKey"];
+    [self initNameData];
+    /**
+    
+     // 首先要在工程里放一个plist文件
+     NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"code" ofType:@"plist"];
+     NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
+     // 给key取得名字
+     NSString *totalStr = dic[@"theKey"];
+     
+     */
+    
+    NSString *totalStr = _leftTV.text;
     NSString *newTotalString = @"";
     NSArray *allLines = [totalStr componentsSeparatedByString:@"\n"];
     
@@ -79,10 +90,15 @@
         i++;
     }
     
-    NSDictionary *writeDic = @{
-                               @"newKey" : newTotalString
-                               };
-    [self creatNewFile:writeDic];
+    /**
+     // 以前用的写文件的方式
+     NSDictionary *writeDic = @{
+     @"newKey" : newTotalString
+     };
+     [self creatNewFile:writeDic];
+     */
+    
+    _rightTV.text = newTotalString;
 }
 
 
@@ -90,15 +106,23 @@
 - (void)initNameData
 {
     // 动词+形容词+名词+名词，4组词语依次混搭，如：查询 新 用户 信息
-//    NSArray *list1 = @[@"mmsq_request", @"mmsq_delete", @"mmsq_creat", @"mmsq_update", @"mmsq_show", @"mmsq_query", @"mmsq_search", @"mmsq_make", @"mmsq_refresh", @"mmsq_get", @"mmsq_save", @"mmsq_download", @"mmsq_reset", @"mmsq_load", @"mmsq_send", @"mmsq_modify", @"mmsq_bind", @"mmsq_unbind", @"mmsq_add", @"mmsq_batch", @"mmsq_init", @"mmsq_config", @"mmsq_parse", @"mmsq_find"];
+//    NSArray *list1 = @[@"request", @"delete", @"creat", @"update", @"show", @"query", @"search", @"make", @"refresh", @"get", @"save", @"download", @"reset", @"load", @"send", @"modify", @"bind", @"unbind", @"add", @"batch", @"init", @"config", @"parse", @"find"];
 //    NSArray *list2 = @[@"", @"New", @"Old", @"Temp", @"Some", @"The", @"Full", @"Total", @"All", @"Free", @"Vip", @"Hot", @"Online", @"Offline"];
 //    NSArray *list3 = @[@"User", @"Device", @"Group", @"Member", @"Family", @"IPC", @"DoorLock", @"CenterControl", @"DoorBell", @"SmartDoor", @"Sensor", @"Friend"];
 //    NSArray *list4 = @[@"Info", @"Status", @"Attribute", @"Data", @"ID", @"TypeID", @"Token", @"List", @"Dic", @"Config", @"Name"];
+    NSString *sub = _subTF.text;
     
-    NSArray *list1 = @[@"mmsq_request", @"mmsq_delete", @"mmsq_creat", @"mmsq_update", @"mmsq_show", @"mmsq_query", @"mmsq_search", @"mmsq_make", @"mmsq_refresh", @"mmsq_get", @"mmsq_save", @"mmsq_download", @"mmsq_reset", @"mmsq_load", @"mmsq_send", @"mmsq_modify", @"mmsq_bind", @"mmsq_unbind", @"mmsq_add", @"mmsq_batch", @"mmsq_init", @"mmsq_config", @"mmsq_parse", @"mmsq_find"];
+    NSArray *list1 = @[@"request", @"delete", @"creat", @"update", @"show", @"query", @"search", @"make", @"refresh", @"get", @"save", @"download", @"reset", @"load", @"send", @"modify", @"bind", @"unbind", @"add", @"batch", @"init", @"config", @"parse", @"find"];
     NSArray *list2 = @[@"", @"New", @"Old", @"Temp", @"Some", @"The", @"Full", @"Total", @"All", @"Free", @"Vip", @"Hot", @"Online", @"Offline"];
     NSArray *list3 = @[@"User", @"Device", @"Group", @"Member", @"Friend", @"Goods", @"Payment", @"Cache", @"Order"];
     NSArray *list4 = @[@"Info", @"Status", @"Attribute", @"Data", @"ID", @"TypeID", @"Token", @"List", @"Dic", @"Config", @"Name"];
+    
+    NSMutableArray *tempList = [NSMutableArray new];
+    for (NSString *str in list1) {
+        NSString *newStr = [NSString stringWithFormat:@"%@_%@",sub, str];
+        [tempList addObject:newStr];
+    }
+    list1 = tempList;
     
     _totalList = @[list1, list2, list3, list4];
     _indexList = [@[@0, @0, @0, @0] mutableCopy];
