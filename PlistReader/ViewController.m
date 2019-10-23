@@ -55,17 +55,19 @@
     NSString *totalStr = _leftTV.text;
     NSString *newTotalString = @"";
     NSArray *allLines = [totalStr componentsSeparatedByString:@"\n"];
-    
-    if (allLines.count > _words.count) {
+    // 新版本 3行才定义一个宏
+    if (allLines.count/3 > _words.count) {
         NSLog(@"CXHLog:⚠️⚠️⚠️词库不足：%ld > %ld", allLines.count, _words.count);
     }
-    // 一整行的#define
+    // 取宏定义的每一行文字
     int i = 0;
     for (NSString *oneLine in allLines) {
         
-        // 用空格分割成3份
+        // ---------- 将关键行用空格分割成3份 ----------
         NSArray *threeWords = [oneLine componentsSeparatedByString:@" "];
-        if (threeWords.count == 3) {
+        NSInteger lastIndex = threeWords.count-1;
+        if ([oneLine containsString:@"#define"]) {
+            NSString *newLine;
             // 词库充足
             if (i < _words.count) {
                 // 给第3节重新造词
@@ -74,25 +76,31 @@
                 [self readyForNext];
                 //_______________________________________________________________________________________________________________
                 
-#pragma mark - ......::::::: 功能选择 :::::::......
-#if 1
-                // 拼接3部分
-                NSString *newLine = [NSString stringWithFormat:@"%@ %@ %@\n",threeWords[0], threeWords[1], thirdWord];
-#else
-                // 只改前缀
-                NSString *newLine = [NSString stringWithFormat:@"%@ %@ MH_%@\n",threeWords[0], threeWords[1], threeWords[1]];
-#endif
-                // 拼接文件内容
-                newTotalString = [newTotalString stringByAppendingString:newLine];
-//                NSLog(@"CXHLog:生成结果预览：%@", newLine);
+                // 使用自造词拼接
+                if (1) {
+                    newLine = [NSString stringWithFormat:@"%@ %@ %@\n",threeWords[lastIndex-2], threeWords[lastIndex-1], thirdWord];
+                }
+                // 只修改函数名的前缀
+                else
+                {
+                    newLine = [NSString stringWithFormat:@"%@ %@ MH_%@\n",threeWords[lastIndex-2], threeWords[lastIndex-1], threeWords[lastIndex-1]];
+                }
             }
+            // 拼接文件内容
+            newTotalString = [newTotalString stringByAppendingString:newLine];
+            i++;
+            // NSLog(@"CXHLog:生成结果预览：%@", newLine);
+        }
+        // 原封不动保留的行
+        else if ([oneLine containsString:@"#ifndef"] || [oneLine containsString:@"#endif"])
+        {
+            newTotalString = [newTotalString stringByAppendingString:[NSString stringWithFormat:@"%@\n",oneLine]];// 拼接
         }
         else
         {
             NSLog(@"CXHLog:混入了奇怪的东西%@", threeWords);
         }
         
-        i++;
     }
     
     /**
